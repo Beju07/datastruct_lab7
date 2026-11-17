@@ -3,17 +3,42 @@
 /* p-ийн зааж буй Queue-д x утгыг хийнэ */
 void q_push(Queue *p, int x)
 {
-    if (p->head == NULL) {
+    Elm *newNode = (Elm *)malloc(sizeof(Elm));
+
+    if (newNode == NULL) {
         return;
     }
-    Elm *new=(Elm *)malloc(sizeof(Elm));
-    if (new=NULL)
-}
 
+    newNode->x = x;
+    newNode->next = NULL;
+
+    if (p->head == NULL) {
+        p->head = newNode;
+        p->tail = newNode;
+    }
+    else {
+        p->tail->next = newNode;
+        p->tail = newNode;
+    }
+
+    p->len++;
+}
 /* p-ийн зааж буй Queue-с гаргана */
 void q_pop(Queue *p)
 {
-        /* Энд гаргах үйлдлийг хийнэ үү */
+    if (p->head == NULL) {
+        return;
+    }
+
+    Elm *temp = p->head;
+    p->head = p->head->next;
+
+    free(temp);
+    p->len--;
+
+    if (p->head == NULL) {
+        p->tail = NULL;
+    }
 }
 
 /*
@@ -23,5 +48,10 @@ void q_pop(Queue *p)
  */
 void q_print(Queue *p)
 {
-        /* Энд хэвлэх үйлдлийг хийнэ үү */
+    Elm *temp = p->head;
+
+    while (temp != NULL) {
+        printf("%d\n", temp->x);
+        temp = temp->next;
+    }
 }
