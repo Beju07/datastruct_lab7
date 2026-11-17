@@ -4,14 +4,31 @@
  */
 void s_push(Stack *p, int x)
 {
-        /* Энд оруулах үйлдлийг хийнэ үү */
+        Elm *new=(Elm *)malloc(sizeof(Elm));
+        if (new==NULL) {
+          return;
+        }      
+        
+        new->x=x;
+        new->next=p->top;
+        p->top=new;
+        p->len++;
 }
 /*
   p-ийн зааж буй Stack-аас гарах функц
  */
 void s_pop(Stack *p)
 {
-        /* Энд гаргах үйлдлийг хийнэ үү */
+    if (p->top == NULL) {
+            return;
+    }
+
+    Elm *temp = p->top;
+
+    p->top = p->top->next;
+    free(temp);
+
+    p->len--;
 }
 /*
     p-ийн зааж буй Stack-д байгаа элементүүдийг хэвлэх функц.
@@ -20,5 +37,10 @@ void s_pop(Stack *p)
  */
 void s_print(Stack *p)
 {
-        /* Энд хэвлэх үйлдлийг хийнэ үү */
+    Elm *temp = p->top;
+
+    while (temp != NULL) {
+        printf("%d\n", temp->x);
+        temp = temp->next;
+    }
 }

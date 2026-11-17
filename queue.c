@@ -3,7 +3,11 @@
 /* p-ийн зааж буй Queue-д x утгыг хийнэ */
 void q_push(Queue *p, int x)
 {
-        /* Энд оруулах үйлдлийг хийнэ үү */
+    if (p->head == NULL) {
+        return;
+    }
+    Elm *new=(Elm *)malloc(sizeof(Elm));
+    if (new=NULL)
 }
 
 /* p-ийн зааж буй Queue-с гаргана */
